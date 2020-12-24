@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_name"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Nome do Repositorio"/>
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_description"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name"
+        app:layout_constraintStart_toStartOf="@+id/tv_name"
+        android:maxLines="2"
+        android:layout_marginBottom="100dp"
+        android:text="algum texto algum texto algum texto algum texto algum texto algum texto algum texto"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/img_star"
+        app:layout_constraintTop_toBottomOf="@id/tv_description"
+        app:layout_constraintStart_toStartOf="@+id/tv_description"
+        android:src="@android:drawable/btn_star"/>
+
+    <TextView
+        android:id="@+id/tv_stars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toEndOf="@+id/img_star"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description"
+        android:text="552"/>
+
+    <ImageView
+        android:id="@+id/img_fork"
+        android:layout_width="36dp"
+        android:layout_height="24dp"
+        app:srcCompat="@drawable/fork"
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="67dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_stars"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description"/>
+
+    <TextView
+        android:id="@+id/tv_fork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toEndOf="@+id/img_fork"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description"
+        android:text="5552"/>
+
+    <ImageView
+        android:id="@+id/img_user"
+        android:layout_width="88dp"
+        android:layout_height="104dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_user"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/tv_description"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="316dp"
+        tools:layout_editor_absoluteY="108dp"
+        app:layout_constraintStart_toStartOf="@id/img_user"
+        app:layout_constraintEnd_toEndOf="@id/img_user"
+        app:layout_constraintTop_toBottomOf="@id/img_user"
+        android:text="User Name"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
