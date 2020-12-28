@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/repo_item">
 
     <TextView
         android:layout_width="wrap_content"
@@ -12,7 +13,7 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Nome do Repositorio"/>
+        tools:text="Nome do Repositorio"/>
 
     <TextView
         android:layout_width="300dp"
@@ -22,7 +23,7 @@
         app:layout_constraintStart_toStartOf="@+id/tv_name"
         android:maxLines="2"
         android:layout_marginBottom="100dp"
-        android:text="algum texto algum texto algum texto algum texto algum texto algum texto algum texto"/>
+        tools:text="algum texto algum texto algum texto algum texto algum texto algum texto algum texto"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -39,7 +40,7 @@
         android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/img_star"
         app:layout_constraintTop_toBottomOf="@+id/tv_description"
-        android:text="552"/>
+        tools:text="552"/>
 
     <ImageView
         android:id="@+id/img_fork"
@@ -58,7 +59,7 @@
         android:layout_marginTop="12dp"
         app:layout_constraintStart_toEndOf="@+id/img_fork"
         app:layout_constraintTop_toBottomOf="@+id/tv_description"
-        android:text="5552"/>
+        tools:text="5552"/>
 
     <ImageView
         android:id="@+id/img_user"
@@ -66,7 +67,7 @@
         android:layout_height="104dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/ic_user"
+        tools:src="@drawable/ic_user"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/tv_description"
@@ -81,7 +82,7 @@
         app:layout_constraintStart_toStartOf="@id/img_user"
         app:layout_constraintEnd_toEndOf="@id/img_user"
         app:layout_constraintTop_toBottomOf="@id/img_user"
-        android:text="User Name"/>
+        tools:text="User Name"/>
 
 
 

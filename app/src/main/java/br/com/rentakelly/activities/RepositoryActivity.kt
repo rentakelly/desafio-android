@@ -1,5 +1,6 @@
 package br.com.rentakelly.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -44,80 +45,10 @@ class RepositoryActivity : AppCompatActivity() {
 
     }
 
-}
+//    override fun onRepoClickListener(position: Int) {
+//        var intentRepo = Intent(this, ActivityDeboas::class.java)
+//        intentRepo.putExtra()
+//        startActivity(intentRepo)
+//    }
 
-//listOf(
-//Repository(
-//1,
-//"renata",
-//"rentakelly",
-//Owner(
-//"renta",
-//"www.hahaha.com.br"),
-//"lalalaalalalla lalalaalalalla lalalaalalalla lalalaalalalla lalalaalalalla" +
-//"lalalaalalallalalalaalalallalalalaalalallalalalaalalalla",
-//1547,
-//587955
-//
-//),Repository(
-//1,
-//"renata",
-//"rentakelly",
-//Owner(
-//"renta",
-//"www.hahaha.com.br"),
-//"lalalaalalalla lalalaalalalla lalalaalalalla lalalaalalalla lalalaalalalla" +
-//"lalalaalalallalalalaalalallalalalaalalallalalalaalalalla",
-//1547,
-//587955
-//
-//),Repository(
-//1,
-//"renata",
-//"rentakelly",
-//Owner(
-//"renta",
-//"www.hahaha.com.br"),
-//"lalalaalalalla lalalaalalalla lalalaalalalla lalalaalalalla lalalaalalalla" +
-//"lalalaalalallalalalaalalallalalalaalalallalalalaalalalla",
-//1547,
-//587955
-//
-//),Repository(
-//1,
-//"renata",
-//"rentakelly",
-//Owner(
-//"renta",
-//"www.hahaha.com.br"),
-//"lalalaalalalla lalalaalalalla lalalaalalalla lalalaalalalla lalalaalalalla" +
-//"lalalaalalallalalalaalalallalalalaalalallalalalaalalalla",
-//1547,
-//587955
-//
-//),Repository(
-//1,
-//"renata",
-//"rentakelly",
-//Owner(
-//"renta",
-//"www.hahaha.com.br"),
-//"lalalaalalalla lalalaalalalla lalalaalalalla lalalaalalalla lalalaalalalla" +
-//"lalalaalalallalalalaalalallalalalaalalallalalalaalalalla",
-//1547,
-//587955
-//
-//),Repository(
-//1,
-//"renata",
-//"rentakelly",
-//Owner(
-//"renta",
-//"www.hahaha.com.br"),
-//"lalalaalalalla lalalaalalalla lalalaalalalla lalalaalalalla lalalaalalalla" +
-//"lalalaalalallalalalaalalallalalalaalalallalalalaalalalla",
-//1547,
-//587955
-//
-//)
-//)
+}
