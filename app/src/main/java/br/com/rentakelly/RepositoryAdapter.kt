@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 
 class RepositoryAdapter(
     private val repos: List<Repo>,
-    //private val repoClick : onRepoClickListener
+    private val repoClick : onRepoClickListener
 ) : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,9 +25,9 @@ class RepositoryAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding(repos[position])
-//        holder.itemRepositoryBinding.repoItem.setOnClickListener {
-//            repoClick.onRepoClickListener(position)
-//        }
+        holder.itemRepositoryBinding.repoItem.setOnClickListener {
+            repoClick.onRepoClickListener(repos[position])
+        }
     }
 
     override fun getItemCount(): Int {
@@ -52,10 +52,11 @@ class RepositoryAdapter(
 
 
 
+
         }
 
     }
-//    interface  onRepoClickListener {
-//        fun onRepoClickListener(position: Int)
-//    }
+    interface  onRepoClickListener {
+        fun onRepoClickListener(repo: Repo)
+    }
 }

@@ -8,13 +8,15 @@ import androidx.appcompat.app.AppCompatActivity
 import br.com.rentakelly.InitializerClient.init
 import br.com.rentakelly.RepositoryAdapter
 import br.com.rentakelly.databinding.ActivityRepositoryBinding
+import br.com.rentakelly.models.Pull
+import br.com.rentakelly.models.Repo
 import br.com.rentakelly.models.Repos
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
-class RepositoryActivity : AppCompatActivity() {
+class RepositoryActivity : AppCompatActivity(), RepositoryAdapter.onRepoClickListener {
 
     private lateinit var binding: ActivityRepositoryBinding
 
@@ -26,11 +28,12 @@ class RepositoryActivity : AppCompatActivity() {
         setContentView(binding.root)
         //binding.recyclerRepository.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        client.reposList().enqueue(object : Callback<Repos>{
+        client.reposList().enqueue(object : Callback<Repos> {
             override fun onResponse(call: Call<Repos>, response: Response<Repos>) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     response.body()?.let {
-                        binding.recyclerRepository.adapter = RepositoryAdapter(it.items)
+                        binding.recyclerRepository.adapter =
+                            RepositoryAdapter(it.items, this@RepositoryActivity)
                     }
                 }
             }
@@ -45,10 +48,16 @@ class RepositoryActivity : AppCompatActivity() {
 
     }
 
-//    override fun onRepoClickListener(position: Int) {
-//        var intentRepo = Intent(this, ActivityDeboas::class.java)
-//        intentRepo.putExtra()
-//        startActivity(intentRepo)
-//    }
+    override fun onRepoClickListener(repo: Repo) {
+        Toast.makeText(this, repo.name, Toast.LENGTH_LONG).show()
+        val intent = Intent(this@RepositoryActivity, PullsActivity::class.java).apply {
+            putExtra(KEY_OWNER, repo.owner.login)
+            putExtra(KEY_NAME, repo.name)
+        }
+        startActivity(intent)
+    }
+
 
 }
+
+
