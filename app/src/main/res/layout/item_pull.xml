@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    android:id="@+id/pull_item">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_pullname"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Nome do Repositorio"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_descriptionPull"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_pullname"
+        app:layout_constraintStart_toStartOf="@id/tv_pullname"
+        tools:text="Imagine uma descricao gigante aqui com umas duas linhas ou mais, so falando sobre o pull"/>
+
+    <ImageView
+        android:id="@+id/img_user"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        tools:src="@drawable/ic_user"
+        app:layout_constraintStart_toStartOf="@+id/tv_descriptionPull"
+        app:layout_constraintTop_toBottomOf="@id/tv_descriptionPull" />
+
+    <TextView
+        android:id="@+id/tv_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="@id/img_user"
+        app:layout_constraintStart_toEndOf="@id/img_user"
+        app:layout_constraintTop_toBottomOf="@id/tv_descriptionPull"
+        tools:text="User Name" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
