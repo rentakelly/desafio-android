@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import br.com.rentakelly.databinding.ItemPullBinding
 import br.com.rentakelly.models.Pull
+import com.bumptech.glide.Glide
 
 class PullAdapter(
     private val pull: List<Pull>,
@@ -39,13 +40,13 @@ class PullAdapter(
         val itemPullBinding: ItemPullBinding
     ) : RecyclerView.ViewHolder(itemPullBinding.root) {
         fun binding(pull: Pull) {
-            itemPullBinding.tvUsername.text = pull.user.toString()
+            itemPullBinding.tvUsername.text = pull.user.login
             itemPullBinding.tvDescriptionPull.text = pull.description
             itemPullBinding.tvPullname.text = pull.title
-//            Glide.with(itemView.context)
-//                .load(repo.owner.avatar)
-//                .circleCrop()
-//                .into(itemPullBinding.imgUser)
+            Glide.with(itemView.context)
+                .load(pull.user.avatar)
+                .circleCrop()
+                .into(itemPullBinding.imgUser)
 
 
         }

@@ -7,5 +7,6 @@ data class Pull (
     @SerializedName("user") val user : Owner,
     @SerializedName("title") val title : String,
     @SerializedName("body") val description: String,
+    @SerializedName("owner") val owner: Owner,
 
     )
