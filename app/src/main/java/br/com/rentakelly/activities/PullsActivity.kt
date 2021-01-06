@@ -1,9 +1,13 @@
 package br.com.rentakelly.activities
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.rentakelly.InitializerClient
 import br.com.rentakelly.PullAdapter
 import br.com.rentakelly.R
@@ -15,6 +19,7 @@ import br.com.rentakelly.models.Repos
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.jar.Attributes
 
 const val KEY_OWNER = "owner"
 const val KEY_NAME = "name"
@@ -31,16 +36,28 @@ class PullsActivity : AppCompatActivity(), PullAdapter.onPullClickListener{
         super.onCreate(savedInstanceState)
         binding = ActivityPullsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbarPull)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        binding.recyclerPull.adapter = adapter
+        binding.recyclerPull.layoutManager = LinearLayoutManager(this)
+        binding.recyclerPull.setHasFixedSize(true)
+
         intent.extras?.let {
 
 
             val login = it.getString(KEY_OWNER)
             val name = it.getString(KEY_NAME)
 
+            binding.toolbarPull.title = name
+
+
             if (login!=null && name!=null ) {
                 fetchPulls(login, name)
 
             }
+
 
 //            binding.tvPullname.text = "$login$name"
         }
@@ -61,6 +78,7 @@ class PullsActivity : AppCompatActivity(), PullAdapter.onPullClickListener{
                     response.body()?.let {
                         binding.recyclerPull.adapter =
                             PullAdapter(it, this@PullsActivity)
+                        pullList.addAll(it)
                     }
                 }
             }
@@ -68,8 +86,24 @@ class PullsActivity : AppCompatActivity(), PullAdapter.onPullClickListener{
         })
     }
 
-    override fun onPullClickListener(pull: Pull) {
-        TODO("Not yet implemented")
+//    override fun onPullClickListener(pull: Pull) {
+//        TODO("Not yet implemented")
+//    }
+
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> finish()
+        }
+        return false
+    }
+
+    override fun onPullClickListener(position: Int) {
+        val link = adapter.pull[position].link
+        val intentPull = Intent(Intent.ACTION_VIEW, Uri.parse(link))
+        startActivity(intentPull)
+
     }
 }
 

@@ -8,7 +8,7 @@ import br.com.rentakelly.models.Pull
 import com.bumptech.glide.Glide
 
 class PullAdapter(
-    private val pull: List<Pull>,
+    val pull: List<Pull>,
     private val pullClick: onPullClickListener
 
 
@@ -26,9 +26,9 @@ class PullAdapter(
     }
 
     override fun onBindViewHolder(holder: PullAdapter.PullViewHolder, position: Int) {
-        holder.binding(pull[position])
+        holder.binding(this.pull [position])
         holder.itemPullBinding.pullItem.setOnClickListener {
-            pullClick.onPullClickListener(pull[position])
+            pullClick.onPullClickListener(position)
         }
     }
 
@@ -54,7 +54,7 @@ class PullAdapter(
     }
 
     interface onPullClickListener {
-        fun onPullClickListener(pull: Pull)
+        fun onPullClickListener(position: Int)
 
     }
 }
