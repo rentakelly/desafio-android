@@ -8,17 +8,19 @@ import androidx.appcompat.app.AppCompatActivity
 import br.com.rentakelly.InitializerClient.init
 import br.com.rentakelly.RepositoryAdapter
 import br.com.rentakelly.databinding.ActivityRepositoryBinding
-import br.com.rentakelly.models.Pull
 import br.com.rentakelly.models.Repo
 import br.com.rentakelly.models.Repos
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+const val QTD_ITEMS = 20
 
-class RepositoryActivity : AppCompatActivity(), RepositoryAdapter.onRepoClickListener {
+class RepositoryActivity : AppCompatActivity(), RepositoryAdapter.RepoListener {
 
     private lateinit var binding: ActivityRepositoryBinding
+
+    private var pageNumber = 1
 
     private val client by lazy { init() }
 
@@ -28,7 +30,13 @@ class RepositoryActivity : AppCompatActivity(), RepositoryAdapter.onRepoClickLis
         setContentView(binding.root)
         //binding.recyclerRepository.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        client.reposList().enqueue(object : Callback<Repos> {
+        loadRepos()
+
+
+    }
+
+    private fun loadRepos() {
+        client.reposList(pageNumber).enqueue(object : Callback<Repos> {
             override fun onResponse(call: Call<Repos>, response: Response<Repos>) {
                 if (response.isSuccessful) {
                     response.body()?.let {
@@ -44,8 +52,6 @@ class RepositoryActivity : AppCompatActivity(), RepositoryAdapter.onRepoClickLis
             }
 
         })
-
-
     }
 
     override fun onRepoClickListener(repo: Repo) {
@@ -55,6 +61,11 @@ class RepositoryActivity : AppCompatActivity(), RepositoryAdapter.onRepoClickLis
             putExtra(KEY_NAME, repo.name)
         }
         startActivity(intent)
+    }
+
+    override fun onThresholdReached() {
+        pageNumber++
+        loadRepos()
     }
 
 

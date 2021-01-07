@@ -86,9 +86,6 @@ class PullsActivity : AppCompatActivity(), PullAdapter.onPullClickListener{
         })
     }
 
-//    override fun onPullClickListener(pull: Pull) {
-//        TODO("Not yet implemented")
-//    }
 
 
 

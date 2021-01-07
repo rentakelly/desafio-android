@@ -3,13 +3,14 @@ package br.com.rentakelly
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import br.com.rentakelly.activities.QTD_ITEMS
 import br.com.rentakelly.databinding.ItemRepositoryBinding
 import br.com.rentakelly.models.Repo
 import com.bumptech.glide.Glide
 
 class RepositoryAdapter(
     private val repos: List<Repo>,
-    private val repoClick : onRepoClickListener
+    private val repoListener : RepoListener
 ) : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,8 +26,10 @@ class RepositoryAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding(repos[position])
+        if (position>= QTD_ITEMS) repoListener.onThresholdReached()
         holder.itemRepositoryBinding.repoItem.setOnClickListener {
-            repoClick.onRepoClickListener(repos[position])
+            repoListener.onRepoClickListener(repos[position])
+
         }
     }
 
@@ -56,7 +59,8 @@ class RepositoryAdapter(
         }
 
     }
-    interface  onRepoClickListener {
+    interface  RepoListener {
         fun onRepoClickListener(repo: Repo)
+        fun onThresholdReached()
     }
 }
