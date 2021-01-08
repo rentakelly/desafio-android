@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_name"
         android:textSize="18sp"
+        android:textColor="@color/purple_500"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Nome do Repositorio"/>
@@ -26,40 +27,44 @@
         tools:text="algum texto algum texto algum texto algum texto algum texto algum texto algum texto"/>
 
     <ImageView
+        android:id="@+id/img_star"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/img_star"
-        app:layout_constraintTop_toBottomOf="@id/tv_description"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/ic_star"
         app:layout_constraintStart_toStartOf="@+id/tv_description"
-        android:src="@drawable/ic_star"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_description" />
 
     <TextView
         android:id="@+id/tv_stars"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
+        android:textSize="18sp"
+        android:textColor="@color/purple_200"
         app:layout_constraintStart_toEndOf="@+id/img_star"
         app:layout_constraintTop_toBottomOf="@+id/tv_description"
-        tools:text="552"/>
+        tools:text="552" />
 
     <ImageView
         android:id="@+id/img_fork"
         android:layout_width="36dp"
         android:layout_height="24dp"
-        app:srcCompat="@drawable/ic_fork"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="67dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintStart_toEndOf="@+id/tv_stars"
-        app:layout_constraintTop_toBottomOf="@+id/tv_description"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_description"
+        app:srcCompat="@drawable/ic_fork" />
 
     <TextView
         android:id="@+id/tv_fork"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
+        android:textSize="18sp"
+        android:textColor="@color/purple_200"
         app:layout_constraintStart_toEndOf="@+id/img_fork"
         app:layout_constraintTop_toBottomOf="@+id/tv_description"
-        tools:text="5552"/>
+        tools:text="5552" />
 
     <ImageView
         android:id="@+id/img_user"
@@ -79,6 +84,7 @@
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="316dp"
         tools:layout_editor_absoluteY="108dp"
+        android:textColor="@color/purple_300"
         app:layout_constraintStart_toStartOf="@id/img_user"
         app:layout_constraintEnd_toEndOf="@id/img_user"
         app:layout_constraintTop_toBottomOf="@id/img_user"

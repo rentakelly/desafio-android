@@ -3,6 +3,7 @@ package br.com.rentakelly.activities
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.com.rentakelly.InitializerClient.init
@@ -14,9 +15,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-const val QTD_ITEMS = 20
+var limitePages= 20
 
 class RepositoryActivity : AppCompatActivity(), RepositoryAdapter.RepoListener {
+
+    private val listaRepoAdapter = RepositoryAdapter( this)
 
     private lateinit var binding: ActivityRepositoryBinding
 
@@ -28,10 +31,9 @@ class RepositoryActivity : AppCompatActivity(), RepositoryAdapter.RepoListener {
         super.onCreate(savedInstanceState)
         binding = ActivityRepositoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //binding.recyclerRepository.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        binding.recyclerRepository.adapter = listaRepoAdapter
 
         loadRepos()
-
 
     }
 
@@ -40,8 +42,9 @@ class RepositoryActivity : AppCompatActivity(), RepositoryAdapter.RepoListener {
             override fun onResponse(call: Call<Repos>, response: Response<Repos>) {
                 if (response.isSuccessful) {
                     response.body()?.let {
-                        binding.recyclerRepository.adapter =
-                            RepositoryAdapter(it.items, this@RepositoryActivity)
+                            listaRepoAdapter.addRepos(it.items)
+                        binding.loading.visibility = View.GONE
+                        binding.recyclerRepository.visibility = View.VISIBLE
                     }
                 }
             }
@@ -65,6 +68,7 @@ class RepositoryActivity : AppCompatActivity(), RepositoryAdapter.RepoListener {
 
     override fun onThresholdReached() {
         pageNumber++
+        limitePages+=20
         loadRepos()
     }
 

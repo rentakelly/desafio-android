@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/tv_pullname"
         android:textSize="18sp"
+        android:textColor="@color/purple_500"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Nome do Repositorio"/>
@@ -39,6 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:textColor="@color/purple_200"
         app:layout_constraintLeft_toLeftOf="@id/img_user"
         app:layout_constraintStart_toEndOf="@id/img_user"
         app:layout_constraintTop_toBottomOf="@id/tv_descriptionPull"

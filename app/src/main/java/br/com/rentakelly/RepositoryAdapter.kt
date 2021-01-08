@@ -3,15 +3,16 @@ package br.com.rentakelly
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import br.com.rentakelly.activities.QTD_ITEMS
+import br.com.rentakelly.activities.limitePages
 import br.com.rentakelly.databinding.ItemRepositoryBinding
 import br.com.rentakelly.models.Repo
 import com.bumptech.glide.Glide
 
 class RepositoryAdapter(
-    private val repos: List<Repo>,
     private val repoListener : RepoListener
 ) : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>() {
+
+    private val repos= mutableListOf<Repo>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -26,7 +27,7 @@ class RepositoryAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding(repos[position])
-        if (position>= QTD_ITEMS) repoListener.onThresholdReached()
+        if (position>= limitePages) repoListener.onThresholdReached()
         holder.itemRepositoryBinding.repoItem.setOnClickListener {
             repoListener.onRepoClickListener(repos[position])
 
@@ -35,6 +36,13 @@ class RepositoryAdapter(
 
     override fun getItemCount(): Int {
         return repos.size
+    }
+
+    fun addRepos(newRepo:List<Repo>) {
+        val index = repos.size
+        repos.addAll(newRepo)
+        notifyItemRangeChanged(index, newRepo.size)
+
     }
 
     class ViewHolder(
