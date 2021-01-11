@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.rentakelly.InitializerClient
@@ -79,6 +80,7 @@ class PullsActivity : AppCompatActivity(), PullAdapter.onPullClickListener{
                         binding.recyclerPull.adapter =
                             PullAdapter(it, this@PullsActivity)
                         pullList.addAll(it)
+                        loading()
                     }
                 }
             }
@@ -86,7 +88,10 @@ class PullsActivity : AppCompatActivity(), PullAdapter.onPullClickListener{
         })
     }
 
-
+    private fun loading() {
+        binding.loading.visibility = View.GONE
+        binding.recyclerPull.visibility = View.VISIBLE
+    }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

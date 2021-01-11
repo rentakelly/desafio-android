@@ -1,6 +1,7 @@
 package br.com.rentakelly.activities
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -43,8 +44,7 @@ class RepositoryActivity : AppCompatActivity(), RepositoryAdapter.RepoListener {
                 if (response.isSuccessful) {
                     response.body()?.let {
                             listaRepoAdapter.addRepos(it.items)
-                        binding.loading.visibility = View.GONE
-                        binding.recyclerRepository.visibility = View.VISIBLE
+                        loading()
                     }
                 }
             }
@@ -55,6 +55,11 @@ class RepositoryActivity : AppCompatActivity(), RepositoryAdapter.RepoListener {
             }
 
         })
+    }
+
+    private fun loading() {
+        binding.loading.visibility = View.GONE
+        binding.recyclerRepository.visibility = View.VISIBLE
     }
 
     override fun onRepoClickListener(repo: Repo) {
