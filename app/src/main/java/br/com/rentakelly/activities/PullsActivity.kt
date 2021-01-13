@@ -2,68 +2,50 @@ package br.com.rentakelly.activities
 
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.rentakelly.InitializerClient
-import br.com.rentakelly.PullAdapter
-import br.com.rentakelly.R
-import br.com.rentakelly.RepositoryAdapter
+import br.com.rentakelly.adapter.PullAdapter
 import br.com.rentakelly.databinding.ActivityPullsBinding
-import br.com.rentakelly.databinding.ActivityRepositoryBinding
 import br.com.rentakelly.models.Pull
-import br.com.rentakelly.models.Repos
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.jar.Attributes
 
 const val KEY_OWNER = "owner"
 const val KEY_NAME = "name"
 
-class PullsActivity : AppCompatActivity(), PullAdapter.onPullClickListener{
+class PullsActivity : AppCompatActivity(), PullAdapter.onPullClickListener {
 
     private var pullList = ArrayList<Pull>()
     private var adapter = PullAdapter(pullList, this)
     private lateinit var binding: ActivityPullsBinding
     private val client by lazy { InitializerClient.init() }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPullsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.toolbarPull)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         binding.recyclerPull.adapter = adapter
         binding.recyclerPull.layoutManager = LinearLayoutManager(this)
         binding.recyclerPull.setHasFixedSize(true)
-
         intent.extras?.let {
-
-
             val login = it.getString(KEY_OWNER)
             val name = it.getString(KEY_NAME)
 
             binding.toolbarPull.title = name
 
-
-            if (login!=null && name!=null ) {
+            if (login != null && name != null) {
                 fetchPulls(login, name)
-
             }
-
-
-//            binding.tvPullname.text = "$login$name"
         }
-
-
     }
 
     fun fetchPulls(login: String, name: String) {
@@ -84,7 +66,6 @@ class PullsActivity : AppCompatActivity(), PullAdapter.onPullClickListener{
                     }
                 }
             }
-
         })
     }
 
@@ -92,7 +73,6 @@ class PullsActivity : AppCompatActivity(), PullAdapter.onPullClickListener{
         binding.loading.visibility = View.GONE
         binding.recyclerPull.visibility = View.VISIBLE
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -105,7 +85,5 @@ class PullsActivity : AppCompatActivity(), PullAdapter.onPullClickListener{
         val link = adapter.pull[position].link
         val intentPull = Intent(Intent.ACTION_VIEW, Uri.parse(link))
         startActivity(intentPull)
-
     }
 }
-

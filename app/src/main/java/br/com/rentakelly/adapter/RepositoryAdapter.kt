@@ -1,4 +1,4 @@
-package br.com.rentakelly
+package br.com.rentakelly.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,10 +9,10 @@ import br.com.rentakelly.models.Repo
 import com.bumptech.glide.Glide
 
 class RepositoryAdapter(
-    private val repoListener : RepoListener
+    private val repoListener: RepoListener
 ) : RecyclerView.Adapter<RepositoryAdapter.ViewHolder>() {
 
-    private val repos= mutableListOf<Repo>()
+    private val repos = mutableListOf<Repo>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -20,17 +20,15 @@ class RepositoryAdapter(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-
             )
         )
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding(repos[position])
-        if (position>= limitePages) repoListener.onThresholdReached()
+        if (position >= limitePages) repoListener.onThresholdReached()
         holder.itemRepositoryBinding.repoItem.setOnClickListener {
             repoListener.onRepoClickListener(repos[position])
-
         }
     }
 
@@ -38,11 +36,10 @@ class RepositoryAdapter(
         return repos.size
     }
 
-    fun addRepos(newRepo:List<Repo>) {
+    fun addRepos(newRepo: List<Repo>) {
         val index = repos.size
         repos.addAll(newRepo)
         notifyItemRangeChanged(index, newRepo.size)
-
     }
 
     class ViewHolder(
@@ -58,16 +55,10 @@ class RepositoryAdapter(
                 .load(repo.owner.avatar)
                 .circleCrop()
                 .into(itemRepositoryBinding.imgUser)
-
-
-
-
-
-
         }
-
     }
-    interface  RepoListener {
+
+    interface RepoListener {
         fun onRepoClickListener(repo: Repo)
         fun onThresholdReached()
     }

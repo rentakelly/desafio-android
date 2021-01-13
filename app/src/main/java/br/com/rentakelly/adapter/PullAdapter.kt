@@ -1,4 +1,4 @@
-package br.com.rentakelly
+package br.com.rentakelly.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -25,8 +25,8 @@ class PullAdapter(
         )
     }
 
-    override fun onBindViewHolder(holder: PullAdapter.PullViewHolder, position: Int) {
-        holder.binding(this.pull [position])
+    override fun onBindViewHolder(holder: PullViewHolder, position: Int) {
+        holder.binding(this.pull[position])
         holder.itemPullBinding.pullItem.setOnClickListener {
             pullClick.onPullClickListener(position)
         }
@@ -47,15 +47,11 @@ class PullAdapter(
                 .load(pull.user.avatar)
                 .circleCrop()
                 .into(itemPullBinding.imgUser)
-
-
         }
-
     }
 
     interface onPullClickListener {
         fun onPullClickListener(position: Int)
-
     }
 }
 

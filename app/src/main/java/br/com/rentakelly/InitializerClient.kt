@@ -10,8 +10,5 @@ object InitializerClient {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(RepositoryService::class.java)
-
-
     }
-
 }

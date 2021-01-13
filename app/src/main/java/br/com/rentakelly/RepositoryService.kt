@@ -12,9 +12,8 @@ interface RepositoryService {
     fun reposList(@Query("page") page: Int): Call<Repos>
 
     @GET("repos/{login}/{name}/pulls")
-    fun pullsList(@Path("login") login: String,
-                  @Path("name") name: String): Call<List<Pull>>
-
-
-
+    fun pullsList(
+        @Path("login") login: String,
+        @Path("name") name: String
+    ): Call<List<Pull>>
 }
