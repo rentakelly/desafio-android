@@ -1,4 +1,4 @@
-package br.com.rentakelly.adapter
+package br.com.rentakelly.pull
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

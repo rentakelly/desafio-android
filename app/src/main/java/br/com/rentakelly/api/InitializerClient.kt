@@ -1,4 +1,4 @@
-package br.com.rentakelly
+package br.com.rentakelly.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

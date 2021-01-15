@@ -1,4 +1,4 @@
-package br.com.rentakelly.activities
+package br.com.rentakelly.pull
 
 import android.content.Intent
 import android.net.Uri
@@ -9,8 +9,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import br.com.rentakelly.InitializerClient
-import br.com.rentakelly.adapter.PullAdapter
+import br.com.rentakelly.api.InitializerClient
 import br.com.rentakelly.databinding.ActivityPullsBinding
 import br.com.rentakelly.models.Pull
 import retrofit2.Call

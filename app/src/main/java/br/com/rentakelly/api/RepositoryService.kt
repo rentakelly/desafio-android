@@ -1,4 +1,4 @@
-package br.com.rentakelly
+package br.com.rentakelly.api
 
 import br.com.rentakelly.models.Pull
 import br.com.rentakelly.models.Repos
