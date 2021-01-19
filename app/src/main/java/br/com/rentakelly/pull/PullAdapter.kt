@@ -8,7 +8,7 @@ import br.com.rentakelly.models.Pull
 import com.bumptech.glide.Glide
 
 class PullAdapter(
-    val pull: List<Pull>,
+    var pull: List<Pull>,
     private val pullClick: onPullClickListener
 
 

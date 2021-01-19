@@ -3,18 +3,16 @@ package br.com.rentakelly.pull
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import br.com.rentakelly.PullViewModelFactory
 import br.com.rentakelly.api.InitializerClient
 import br.com.rentakelly.databinding.ActivityPullsBinding
 import br.com.rentakelly.models.Pull
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 const val KEY_OWNER = "owner"
 const val KEY_NAME = "name"
@@ -24,7 +22,7 @@ class PullsActivity : AppCompatActivity(), PullAdapter.onPullClickListener {
     private var pullList = ArrayList<Pull>()
     private var adapter = PullAdapter(pullList, this)
     private lateinit var binding: ActivityPullsBinding
-    private val client by lazy { InitializerClient.init() }
+    private val viewModel: PullViewModel by viewModels { PullViewModelFactory(InitializerClient.init()) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,30 +40,19 @@ class PullsActivity : AppCompatActivity(), PullAdapter.onPullClickListener {
             binding.toolbarPull.title = name
 
             if (login != null && name != null) {
-                fetchPulls(login, name)
+                viewModel.fetchPulls(login, name)
             }
         }
+        observerPull()
     }
 
-    fun fetchPulls(login: String, name: String) {
-        client.pullsList(login, name).enqueue(object : Callback<List<Pull>> {
-
-            override fun onFailure(call: Call<List<Pull>>, t: Throwable) {
-                Log.d("Erro de chamada", t.message.toString())
-                Toast.makeText(this@PullsActivity, t.message, Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(call: Call<List<Pull>>, response: Response<List<Pull>>) {
-                if (response.isSuccessful) {
-                    response.body()?.let {
-                        binding.recyclerPull.adapter =
-                            PullAdapter(it, this@PullsActivity)
-                        pullList.addAll(it)
-                        loading()
-                    }
-                }
-            }
+    private fun observerPull(){
+        viewModel.liveDataPublica.observe(this, Observer {
+            adapter.pull = it
+            adapter.notifyDataSetChanged()
+            loading()
         })
+
     }
 
     private fun loading() {
