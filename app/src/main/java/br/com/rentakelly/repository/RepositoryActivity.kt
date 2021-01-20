@@ -17,7 +17,7 @@ import br.com.rentakelly.pull.PullsActivity
 
 class RepositoryActivity : AppCompatActivity(), RepositoryAdapter.RepoListener {
 
-    private val listaRepoAdapter = RepositoryAdapter( this)
+    private val listaRepoAdapter = RepositoryAdapter(this)
     private lateinit var binding: ActivityRepositoryBinding
     private val viewModel: RepositoryViewModel by viewModels { ViewModelFactory(InitializerClient.init()) }
 
@@ -29,13 +29,12 @@ class RepositoryActivity : AppCompatActivity(), RepositoryAdapter.RepoListener {
         observerRepos()
         viewModel.loadRepos()
     }
-    private fun observerRepos(){
+    private fun observerRepos() {
         viewModel.liveDataPublica.observe(this, Observer {
             listaRepoAdapter.addRepos(it)
             listaRepoAdapter.notifyDataSetChanged()
             loading()
         })
-
     }
     private fun loading() {
         binding.loading.visibility = View.GONE

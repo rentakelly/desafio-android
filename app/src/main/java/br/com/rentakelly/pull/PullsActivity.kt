@@ -9,7 +9,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import br.com.rentakelly.PullViewModelFactory
 import br.com.rentakelly.api.InitializerClient
 import br.com.rentakelly.databinding.ActivityPullsBinding
 import br.com.rentakelly.models.Pull
@@ -17,7 +16,7 @@ import br.com.rentakelly.models.Pull
 const val KEY_OWNER = "owner"
 const val KEY_NAME = "name"
 
-class PullsActivity : AppCompatActivity(), PullAdapter.onPullClickListener {
+class PullsActivity : AppCompatActivity(), PullAdapter.OnPullClick {
 
     private var pullList = ArrayList<Pull>()
     private var adapter = PullAdapter(pullList, this)
@@ -46,13 +45,12 @@ class PullsActivity : AppCompatActivity(), PullAdapter.onPullClickListener {
         observerPull()
     }
 
-    private fun observerPull(){
+    private fun observerPull() {
         viewModel.liveDataPublica.observe(this, Observer {
             adapter.pull = it
             adapter.notifyDataSetChanged()
             loading()
         })
-
     }
 
     private fun loading() {

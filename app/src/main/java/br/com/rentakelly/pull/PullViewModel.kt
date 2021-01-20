@@ -13,8 +13,8 @@ import retrofit2.Response
 
 class PullViewModel(private val client: RepositoryService) : ViewModel() {
 
-    private  val listaLiveData : MutableLiveData<List<Pull>> = MutableLiveData()
-    val liveDataPublica : LiveData<List<Pull>> = listaLiveData
+    private val listaLiveData: MutableLiveData<List<Pull>> = MutableLiveData()
+    val liveDataPublica: LiveData<List<Pull>> = listaLiveData
 
     fun fetchPulls(login: String, name: String) {
         client.pullsList(login, name).enqueue(object : Callback<List<Pull>> {
@@ -31,7 +31,7 @@ class PullViewModel(private val client: RepositoryService) : ViewModel() {
 //                        binding.recyclerPull.adapter =
 //                            PullAdapter(it, this@PullsActivity)
 //                        pullList.addAll(it)
-                        //loading()
+                        // loading()
                     }
                 }
             }

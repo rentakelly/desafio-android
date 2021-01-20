@@ -9,8 +9,7 @@ import com.bumptech.glide.Glide
 
 class PullAdapter(
     var pull: List<Pull>,
-    private val pullClick: onPullClickListener
-
+    private val pullClick: OnPullClick
 
 ) : RecyclerView.Adapter<PullAdapter.PullViewHolder>() {
 
@@ -50,12 +49,7 @@ class PullAdapter(
         }
     }
 
-    interface onPullClickListener {
+    interface OnPullClick {
         fun onPullClickListener(position: Int)
     }
 }
-
-
-
-
-

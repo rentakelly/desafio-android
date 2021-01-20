@@ -7,6 +7,8 @@ import br.com.rentakelly.databinding.ItemRepositoryBinding
 import br.com.rentakelly.models.Repo
 import com.bumptech.glide.Glide
 
+const val PAGINA = 5
+
 class RepositoryAdapter(
 
     private val repoListener: RepoListener
@@ -26,7 +28,7 @@ class RepositoryAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding(repos[position])
-        if (position == itemCount-5) repoListener.onThresholdReached()
+        if (position == itemCount - PAGINA) repoListener.onThresholdReached()
         holder.itemRepositoryBinding.repoItem.setOnClickListener {
             repoListener.onRepoClickListener(repos[position])
         }
