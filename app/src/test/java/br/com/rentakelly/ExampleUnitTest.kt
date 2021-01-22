@@ -1,8 +1,14 @@
 package br.com.rentakelly
 
+import br.com.rentakelly.api.RepositoryService
+import br.com.rentakelly.models.Repos
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.slot
 import org.junit.Test
 
 import org.junit.Assert.*
+import retrofit2.Call
 
 /**
  * Example local unit test, which will execute on the development machine (host).

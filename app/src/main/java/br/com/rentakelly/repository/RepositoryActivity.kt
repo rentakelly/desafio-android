@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import br.com.rentakelly.ViewModelFactory
 import br.com.rentakelly.api.InitializerClient
 import br.com.rentakelly.databinding.ActivityRepositoryBinding
 import br.com.rentakelly.models.Repo

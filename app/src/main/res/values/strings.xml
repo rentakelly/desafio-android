@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Git Rentakelly</string>
+    <string name="error_servidor">Deu merda</string>
+    <string name="error_app">Erro de aplicativo</string>
 </resources>
