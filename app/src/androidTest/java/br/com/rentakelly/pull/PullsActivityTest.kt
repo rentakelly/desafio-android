@@ -1,42 +1,48 @@
 package br.com.rentakelly.pull
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import okhttp3.mockwebserver.MockWebServer
-import org.junit.After
-import org.junit.Before
+import br.com.rentakelly.utils.MockWebServerRule
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class PullsActivityTest {
 
-    //@get:Rule
-    private val mockWebServer = MockWebServer()
+    @get:Rule
+    val mockWebServerRule = MockWebServerRule()
 
-    @Before
-    fun setup() {
-        pullArrange(mockWebServer) {
-            registerIdlingResourse()
-        }
-    }
-
-
-    @After
-    fun teardown() {
-        pullArrange(mockWebServer) {
-            shutDownServer()
-        }
-    }
 
     @Test
     fun givenRequestSucessful_shouldRenderOullList() {
-        pullArrange(mockWebServer) {
+        pullArrange(mockWebServerRule) {
             enqueueResponse("resposta_sucesso_pull.json")
-            startServer()
             starPullScren()
         }
         pullAssert {
             checkTextVisible("547. Friend Circles 改名为547. Number of Provinces")
         }
+    }
+
+    @Test
+    fun givenRequestErrorServidor_shouldRenderOullList() {
+        pullArrange(mockWebServerRule) {
+            enqueueResponseError()
+            starPullScren()
+        }
+        pullAssert {
+            checkTextVisible("Erro de aplicativo")
+        }
+    }
+    @Test
+    fun givenRequestError_shouldReturnDialogAlert(){
+        pullArrange(mockWebServerRule) {
+            enqueueError(Throwable())
+            starPullScren()
+        }
+        pullAssert {
+            checkTextVisible("Deu merda")
+        }
+
     }
 }

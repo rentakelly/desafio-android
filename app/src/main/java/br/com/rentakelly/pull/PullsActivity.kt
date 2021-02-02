@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -51,6 +53,12 @@ class PullsActivity : AppCompatActivity(), PullAdapter.OnPullClick {
             adapter.notifyDataSetChanged()
             loading()
         })
+        viewModel.listaLiveDataErroPublica.observe(this, Observer {
+            error(it)
+        })
+    }
+    fun error(@StringRes error: Int){
+        AlertDialog.Builder(this).setMessage(error).show()
     }
 
     private fun loading() {

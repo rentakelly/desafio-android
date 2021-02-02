@@ -11,47 +11,53 @@ import androidx.test.espresso.matcher.ViewMatchers
 import br.com.rentakelly.api.InitializerClient
 import br.com.rentakelly.loadAsFixture
 import br.com.rentakelly.retryer
+import br.com.rentakelly.utils.HttpStatus
+import br.com.rentakelly.utils.MockWebServerRule
 import com.jakewharton.espresso.OkHttp3IdlingResource
 import okhttp3.mockwebserver.MockResponse
-import okhttp3.mockwebserver.MockWebServer
 
 class pullArrange(
-    private val mockWebServer: MockWebServer,
+    private val mockWebServerRule: MockWebServerRule,
     action: pullArrange.() -> Unit
 ) {
     init {
         action.invoke(this)
     }
 
-    fun registerIdlingResourse() {
-        IdlingRegistry.getInstance().register(
-            OkHttp3IdlingResource.create(
-                "okhttp",
-                InitializerClient.httpClient
-            )
-        )
+//    fun registerIdlingResourse() {
+//        IdlingRegistry.getInstance().register(
+//            OkHttp3IdlingResource.create(
+//                "okhttp",
+//                InitializerClient.httpClient
+//            )
+//        )
+//
+//    }
 
-    }
 
-    fun startServer() {
-        mockWebServer.start(8080)
-        InitializerClient.baseUrl = mockWebServer.url("/").toString()
-    }
-
-    fun shutDownServer() {
-        mockWebServer.shutdown()
-    }
-
-    fun enqueueResponse(responseFileName:String) {
-        mockWebServer.enqueue(
-            MockResponse().setBody("resposta_sucesso_pull.json".loadAsFixture())
+    fun enqueueResponse(responseFileName: String) {
+        mockWebServerRule.mockWebServer.enqueue(
+            MockResponse().setBody(responseFileName.loadAsFixture())
         )
     }
 
-    fun starPullScren(){
+    fun enqueueResponseError() {
+        mockWebServerRule.mockWebServer.enqueue(
+            MockResponse().setResponseCode(HttpStatus.STATUS_400)
+        )
+    }
+
+    fun enqueueError(t:Throwable){
+        mockWebServerRule.mockWebServer.enqueue(
+            MockResponse())
+    }
+
+    fun starPullScren() {
         val bundle = bundleOf(KEY_NAME to "elasticsearch", KEY_OWNER to "elastic")
-        val intent = Intent(ApplicationProvider.getApplicationContext(),
-            PullsActivity::class.java).apply {
+        val intent = Intent(
+            ApplicationProvider.getApplicationContext(),
+            PullsActivity::class.java
+        ).apply {
             putExtras(bundle)
         }
         ActivityScenario.launch<PullsActivity>(intent)
@@ -59,18 +65,19 @@ class pullArrange(
 
 }
 
-class PullAction( action: PullAction.() -> Unit){
+class PullAction(action: PullAction.() -> Unit) {
     init {
         action.invoke(this)
     }
 
 }
 
-class pullAssert( action: pullAssert.() -> Unit){
+class pullAssert(action: pullAssert.() -> Unit) {
     init {
         action.invoke(this)
     }
-    fun checkTextVisible(text:String){
+
+    fun checkTextVisible(text: String) {
         retryer {
             Espresso.onView(ViewMatchers.withText(text))
                 .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
