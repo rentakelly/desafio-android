@@ -1,5 +1,7 @@
 package br.com.rentakelly.utils
 
+import androidx.test.espresso.IdlingRegistry
+import br.com.rentakelly.OkHttp3IdlingResourceAndroidX
 import br.com.rentakelly.api.InitializerClient
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.rules.TestWatcher
@@ -10,6 +12,9 @@ class MockWebServerRule: TestWatcher() {
 
     override fun starting(description: Description?) {
         super.starting(description)
+
+        IdlingRegistry.getInstance().register(
+            OkHttp3IdlingResourceAndroidX.create("OkHttp", InitializerClient.httpClient))
 
         mockWebServer.start(8080)
         InitializerClient.baseUrl = mockWebServer.url("/").toString()
