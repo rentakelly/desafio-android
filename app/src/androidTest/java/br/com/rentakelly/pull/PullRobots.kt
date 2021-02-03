@@ -24,16 +24,6 @@ class pullArrange(
         action.invoke(this)
     }
 
-//    fun registerIdlingResourse() {
-//        IdlingRegistry.getInstance().register(
-//            OkHttp3IdlingResource.create(
-//                "okhttp",
-//                InitializerClient.httpClient
-//            )
-//        )
-//
-//    }
-
 
     fun enqueueResponse(responseFileName: String) {
         mockWebServerRule.mockWebServer.enqueue(
@@ -47,9 +37,10 @@ class pullArrange(
         )
     }
 
-    fun enqueueError(t:Throwable){
+    fun enqueueError(t: Throwable) {
         mockWebServerRule.mockWebServer.enqueue(
-            MockResponse())
+            MockResponse()
+        )
     }
 
     fun starPullScren() {
@@ -78,10 +69,8 @@ class pullAssert(action: pullAssert.() -> Unit) {
     }
 
     fun checkTextVisible(text: String) {
-        retryer {
-            Espresso.onView(ViewMatchers.withText(text))
-                .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-        }
+        Espresso.onView(ViewMatchers.withText(text))
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
 
     }
 
