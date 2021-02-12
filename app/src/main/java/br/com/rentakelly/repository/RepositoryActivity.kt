@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import br.com.rentakelly.api.InitializerClient
@@ -34,7 +36,14 @@ class RepositoryActivity : AppCompatActivity(), RepositoryAdapter.RepoListener {
             listaRepoAdapter.notifyDataSetChanged()
             loading()
         })
+        viewModel.liveDataPublicaErro.observe(this, Observer {
+            error(it)
+        })
     }
+    fun error(@StringRes error: Int){
+        AlertDialog.Builder(this).setMessage(error).show()
+    }
+
     private fun loading() {
         binding.loading.visibility = View.GONE
         binding.recyclerRepository.visibility = View.VISIBLE

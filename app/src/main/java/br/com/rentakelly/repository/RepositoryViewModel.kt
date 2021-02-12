@@ -1,10 +1,9 @@
 package br.com.rentakelly.repository
 
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import br.com.rentakelly.R
 import br.com.rentakelly.api.RepositoryService
 import br.com.rentakelly.models.Repo
 import br.com.rentakelly.models.Repos
@@ -20,9 +19,9 @@ class RepositoryViewModel(
     private var lista = mutableListOf<Repo>()
     private var pageNumber = 1
     private val listaLiveData: MutableLiveData<List<Repo>> = MutableLiveData()
-    private val listaLiveDataErro = MutableLiveData<Any>()
+    private val listaLiveDataErro = MutableLiveData<Int>()
     val liveDataPublica: LiveData<List<Repo>> = listaLiveData
-    val liveDataPublicaErro: LiveData<Any> = listaLiveDataErro
+    val liveDataPublicaErro: LiveData<Int> = listaLiveDataErro
 
     fun loadRepos() {
 
@@ -35,13 +34,15 @@ class RepositoryViewModel(
                         listaLiveData.value = lista
                         pageNumber++
                     }
+                } else {
+                    listaLiveDataErro.postValue(R.string.error_servidor)
                 }
             }
 
             override fun onFailure(call: Call<Repos>, t: Throwable) {
                 logger.logMessege("Erro de chamada", t.message.toString())
                 //Toast.makeText(RepositoryActivity(), t.message, Toast.LENGTH_LONG).show()
-                listaLiveDataErro.postValue(t)
+                listaLiveDataErro.postValue(R.string.error_app)
             }
         })
     }

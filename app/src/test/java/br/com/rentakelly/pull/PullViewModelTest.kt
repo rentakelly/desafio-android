@@ -1,14 +1,11 @@
 package br.com.rentakelly.pull
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import br.com.rentakelly.FakeLogger
+import br.com.rentakelly.utils.FakeLogger
 import br.com.rentakelly.R
 import br.com.rentakelly.api.RepositoryService
 import br.com.rentakelly.models.Owner
 import br.com.rentakelly.models.Pull
-import br.com.rentakelly.models.Repo
-import br.com.rentakelly.models.Repos
-import br.com.rentakelly.repository.RepositoryViewModel
 import io.mockk.every
 import io.mockk.mockk
 import okhttp3.ResponseBody.Companion.toResponseBody

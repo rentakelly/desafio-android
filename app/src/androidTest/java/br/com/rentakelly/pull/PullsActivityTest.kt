@@ -14,7 +14,7 @@ class PullsActivityTest {
 
 
     @Test
-    fun givenRequestSucessful_shouldRenderOullList() {
+    fun givenRequestSucessful_shouldRenderPullList() {
         pullArrange(mockWebServerRule) {
             enqueueResponse("resposta_sucesso_pull.json")
             starPullScren()
@@ -25,7 +25,7 @@ class PullsActivityTest {
     }
 
     @Test
-    fun givenRequestErrorServidor_shouldRenderOullList() {
+    fun givenRequestErrorServidor_shouldRenderPullList() {
         pullArrange(mockWebServerRule) {
             enqueueResponseError()
             starPullScren()

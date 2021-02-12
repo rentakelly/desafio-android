@@ -1,4 +1,4 @@
-package br.com.rentakelly
+package br.com.rentakelly.utils
 
 import br.com.rentakelly.utils.Logger
 

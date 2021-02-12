@@ -56,12 +56,12 @@ class pullArrange(
 
 }
 
-class PullAction(action: PullAction.() -> Unit) {
-    init {
-        action.invoke(this)
-    }
-
-}
+//class PullAction(action: PullAction.() -> Unit) {
+//    init {
+//        action.invoke(this)
+//    }
+//
+//}
 
 class pullAssert(action: pullAssert.() -> Unit) {
     init {
