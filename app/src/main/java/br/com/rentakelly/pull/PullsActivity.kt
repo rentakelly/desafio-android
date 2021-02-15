@@ -57,7 +57,8 @@ class PullsActivity : AppCompatActivity(), PullAdapter.OnPullClick {
             error(it)
         })
     }
-    fun error(@StringRes error: Int){
+
+    fun error(@StringRes error: Int) {
         AlertDialog.Builder(this).setMessage(error).show()
     }
 

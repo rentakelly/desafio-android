@@ -1,10 +1,11 @@
 package br.com.rentakelly.repository
+
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import br.com.rentakelly.api.RepositoryService
 import br.com.rentakelly.utils.LoggerAndroid
 
-class ViewModelFactory(private val client: RepositoryService) : ViewModelProvider.Factory {
+class RepositoryViewModelFactory(private val client: RepositoryService) : ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(RepositoryViewModel::class.java)) {

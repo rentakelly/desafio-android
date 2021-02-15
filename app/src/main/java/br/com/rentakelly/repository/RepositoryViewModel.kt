@@ -41,7 +41,6 @@ class RepositoryViewModel(
 
             override fun onFailure(call: Call<Repos>, t: Throwable) {
                 logger.logMessege("Erro de chamada", t.message.toString())
-                //Toast.makeText(RepositoryActivity(), t.message, Toast.LENGTH_LONG).show()
                 listaLiveDataErro.postValue(R.string.error_app)
             }
         })

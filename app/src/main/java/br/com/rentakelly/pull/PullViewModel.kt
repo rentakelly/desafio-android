@@ -27,7 +27,6 @@ class PullViewModel(
 
             override fun onFailure(call: Call<List<Pull>>, t: Throwable) {
                 logger.logMessege("Erro de chamada", t.message.toString())
-                //Toast.makeText(PullsActivity(), t.message, Toast.LENGTH_LONG).show()
                 listaLiveDataErro.postValue(R.string.error_servidor)
             }
 

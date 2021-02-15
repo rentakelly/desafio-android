@@ -20,7 +20,7 @@ class RepositoryActivity : AppCompatActivity(), RepositoryAdapter.RepoListener {
 
     private val listaRepoAdapter = RepositoryAdapter(this)
     private lateinit var binding: ActivityRepositoryBinding
-    private val viewModel: RepositoryViewModel by viewModels { ViewModelFactory(InitializerClient.init()) }
+    private val viewModel: RepositoryViewModel by viewModels { RepositoryViewModelFactory(InitializerClient.init()) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +30,7 @@ class RepositoryActivity : AppCompatActivity(), RepositoryAdapter.RepoListener {
         observerRepos()
         viewModel.loadRepos()
     }
+
     private fun observerRepos() {
         viewModel.liveDataPublica.observe(this, Observer {
             listaRepoAdapter.addRepos(it)
@@ -40,7 +41,8 @@ class RepositoryActivity : AppCompatActivity(), RepositoryAdapter.RepoListener {
             error(it)
         })
     }
-    fun error(@StringRes error: Int){
+
+    fun error(@StringRes error: Int) {
         AlertDialog.Builder(this).setMessage(error).show()
     }
 

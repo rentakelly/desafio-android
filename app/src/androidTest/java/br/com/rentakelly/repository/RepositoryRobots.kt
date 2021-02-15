@@ -9,6 +9,7 @@ import br.com.rentakelly.loadAsFixture
 import br.com.rentakelly.utils.HttpStatus
 import br.com.rentakelly.utils.MockWebServerRule
 import okhttp3.mockwebserver.MockResponse
+import org.hamcrest.Matchers.endsWith
 
 
 class repositoryArrange(
@@ -57,7 +58,7 @@ class repositoryAssert(action: repositoryAssert.() -> Unit) {
 
     fun checkTextVisible(text: String) {
         //retryer {
-        onView(withText(text)).check(matches(isDisplayed()))
+        onView(withText(endsWith(text))).check(matches(isDisplayed()))
         //}
 
     }
